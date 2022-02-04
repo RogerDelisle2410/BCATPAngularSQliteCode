@@ -1,20 +1,19 @@
-import { Component, OnInit, Input, Output, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { BcatpService, NavyService, DewlineService, PinetreeService, MidCanadaService } from '../services/bcatp.service';
-import { AirforceService, ArmyService, DefunctService } from '../services/bcatp.service';
-import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct } from 'src/models/bcatp';
+import { AirforceService, ArmyService, DefunctService, TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
+import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct, Tanks, Planes, Ships } from 'src/models/bcatp';
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
 import { AddBcatp, AddNavy, AddDewline, AddPinetree } from '../state/actions/bcatp.actions';
-import { AddAirforce, AddArmy, AddDefunct, AddMidCanada } from '../state/actions/bcatp.actions';
+import { AddAirforce, AddArmy, AddDefunct, AddMidCanada, AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 
 import { FetchDataComponent } from '../fetch-data/fetch-data.component';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-create-new',
@@ -58,6 +57,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     private _AirforceService: AirforceService,
     private _ArmyService: ArmyService,
     private _DefunctService: DefunctService,
+    private _TanksService: TanksService,
+    private _PlanesService: PlanesService,
+    private _ShipsService: ShipsService,
     private _router: Router,
     private store: Store<AppState>, 
     private mapsAPILoader: MapsAPILoader,
@@ -138,6 +140,21 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
         break;
       case 'Defunct':
         this._DefunctService.getDefunctById(this.id).subscribe((response = Defunct) => {
+          this.FormName3.setValue(response);
+        }, error => console.error(error));
+        break;
+      case 'Tanks':
+        this._TanksService.getTanksById(this.id).subscribe((response = Tanks) => {
+          this.FormName3.setValue(response);
+        }, error => console.error(error));
+        break;
+      case 'Planes':
+        this._PlanesService.getPlanesById(this.id).subscribe((response = Planes) => {
+          this.FormName3.setValue(response);
+        }, error => console.error(error));
+        break;
+      case 'Ships':
+        this._ShipsService.getShipsById(this.id).subscribe((response = Ships) => {
           this.FormName3.setValue(response);
         }, error => console.error(error));
         break;
@@ -260,6 +277,18 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
         case 'Defunct':  ;
           this.store.dispatch(AddDefunct({ defunct: this.FormName3.value }));
         this._router.navigateByUrl('/fetch-defunct/Defunct/defunct');
+          break;
+        case 'Tanks':
+          this.store.dispatch(AddTanks({ tanks: this.FormName3.value }));
+          this._router.navigateByUrl('/fetch-tanks/Tanks/tanks');
+          break;
+        case 'Planes':
+          this.store.dispatch(AddPlanes({ planes: this.FormName3.value }));
+          this._router.navigateByUrl('/fetch-planes/Planes/planes');
+          break;
+        case 'Ships':
+          this.store.dispatch(AddShips({ ships: this.FormName3.value }));
+          this._router.navigateByUrl('/fetch-ships/Ships/ships');
           break;
         
       }

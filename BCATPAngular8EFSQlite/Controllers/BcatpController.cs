@@ -29,26 +29,26 @@ namespace BCATPAngular8EFSQlite.Controllers
             return objbcatp.AddBcatp(bcatp);
         }
 
-       [HttpGet]   
+        [HttpGet]
         [Route("Details/{id}")]
         public TblBcatp Details(int id)
         {
             return objbcatp.GetBcatpData(id);
         }
 
-       [HttpPut]
+        [HttpPut]
         [Route("Edit")]
-        public int Edit([FromBody]TblBcatp bcatp)
+        public int Edit([FromBody] TblBcatp bcatp)
         {
             return objbcatp.UpdateBcatp(bcatp);
         }
 
-      [HttpDelete]
+        [HttpDelete]
         [Route("Delete/{id}")]
         public int Delete(int id)
         {
             return objbcatp.DeleteBcatp(id);
-        }         
+        }
     }
 
     [Route("api/[controller]")]
@@ -374,4 +374,142 @@ namespace BCATPAngular8EFSQlite.Controllers
             return objdefunct.DeleteDefunct(id);
         }
     }
+
+
+    [Route("api/[controller]")]
+    public class TanksController : Controller
+    {
+        private readonly ITanks objtanks;
+
+        public TanksController(ITanks _objtanks)
+        {
+            objtanks = _objtanks;
+        }
+
+        [HttpGet]
+        [Route("Index")]
+        public IEnumerable<TblTanks> Index()
+        {
+            return objtanks.GetAllTanks();
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public int Create([FromBody] TblTanks tanks)
+        {
+            return objtanks.AddTanks(tanks);
+        }
+
+        [HttpGet]
+        [Route("Details/{id}")]
+        public TblTanks Details(int id)
+        {
+            return objtanks.GetTanksData(id);
+        }
+
+        [HttpPut]
+        [Route("Edit")]
+        public int Edit([FromBody] TblTanks tanks)
+        {
+            return objtanks.UpdateTanks(tanks);
+        }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public int Delete(int id)
+        {
+            return objtanks.DeleteTanks(id);
+        }
+    }
+    [Route("api/[controller]")]
+    public class PlanesController : Controller
+    {
+        private readonly IPlanes objplanes;
+
+        public PlanesController(IPlanes _objplanes)
+        {
+            objplanes = _objplanes;
+        }
+
+        [HttpGet]
+        [Route("Index")]
+        public IEnumerable<TblPlanes> Index()
+        {
+            return objplanes.GetAllPlanes();
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public int Create([FromBody] TblPlanes planes)
+        {
+            return objplanes.AddPlanes(planes);
+        }
+
+        [HttpGet]
+        [Route("Details/{id}")]
+        public TblPlanes Details(int id)
+        {
+            return objplanes.GetPlanesData(id);
+        }
+
+        [HttpPut]
+        [Route("Edit")]
+        public int Edit([FromBody] TblPlanes planes)
+        {
+            return objplanes.UpdatePlanes(planes);
+        }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public int Delete(int id)
+        {
+            return objplanes.DeletePlanes(id);
+        }
+    }
+    [Route("api/[controller]")]
+    public class ShipsController : Controller
+    {
+        private readonly IShips objships;
+
+        public ShipsController(IShips _objships)
+        {
+            objships = _objships;
+        }
+
+        [HttpGet]
+        [Route("Index")]
+        public IEnumerable<TblShips> Index()
+        {
+            return objships.GetAllShips();
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public int Create([FromBody] TblShips ships)
+        {
+            return objships.AddShips(ships);
+        }
+
+        [HttpGet]
+        [Route("Details/{id}")]
+        public TblShips Details(int id)
+        {
+            return objships.GetShipsData(id);
+        }
+
+        [HttpPut]
+        [Route("Edit")]
+        public int Edit([FromBody] TblShips ships)
+        {
+            return objships.UpdateShips(ships);
+        }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public int Delete(int id)
+        {
+            return objships.DeleteShips(id);
+        }
+    }
 }
+

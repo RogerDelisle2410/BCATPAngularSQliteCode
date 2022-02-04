@@ -52,6 +52,15 @@ namespace BCATPAngular8EFSQlite
             services.AddTransient<IDefunct, DefunctDataAccessLayer>();
             services.AddDbContext<BCATPDBContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
 
+            services.AddTransient<ITanks, TanksDataAccessLayer>();
+            services.AddDbContext<BCATPDBContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
+
+            services.AddTransient<IPlanes, PlanesDataAccessLayer>();
+            services.AddDbContext<BCATPDBContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
+
+            services.AddTransient<IShips, ShipsDataAccessLayer>();
+            services.AddDbContext<BCATPDBContext>(options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
+
             ////var clientDomain = Configuration.GetValue<string>("ClientDomain");
             ////services.AddCors(cfg => cfg.AddPolicy("ClientDomain", builder => builder.WithOrigins(clientDomain)));
             services.AddMvc(options => options.EnableEndpointRouting = false);

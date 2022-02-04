@@ -585,3 +585,213 @@ export const DeleteDefunctSuccess = createAction(
   DefunctActionTypes.DELTE_DEFUNCT_SUCCESS,
   props<{ id: number }>()
 )
+
+import { Tanks } from "src/models/bcatp";
+
+export enum TanksActionTypes {
+  FETCH_TANKS = "[TANKS] Fetch Tanks",
+  FETCH_TANKS_SUCCESS = "[TANKS] Fetch Tanks Success",
+  FETCH_TANKS_FAILURE = "[TANKS] Fetch Tanks Failed",
+  ADD_TANKS = '[TANKS] Add',
+  ADD_TANKS_SUCCESS = "[TANKS] Add Tanks Success",
+  ADD_TANKS_FAILURE = "[TANKS] Add Tanks Failed",
+  EDIT_TANKS = '[TANKS] EDIT',
+  EDIT_TANKS_SUCCESS = "[TANKS] EDIT Tanks Success",
+  EDIT_TANKS_FAILURE = "[TANKS] EDIT Tanks Failed",
+  DELETE_TANKS = "[TANKS] Delete Tanks",
+  DELETE_TANKS_SUCCESS = "[TANKS] Delete Tanks Success",
+  DELETE_TANKS_FAILURE = "[TANKS] Delete Tanks Failed",
+}
+
+export const FetchTanks = createAction(
+  TanksActionTypes.FETCH_TANKS
+)
+
+export const LoadTanksSuccess = createAction(
+  TanksActionTypes.FETCH_TANKS_SUCCESS,
+  props<{ tanks: Tanks[] }>()
+)
+
+export const LoadTanksFailure = createAction(
+  TanksActionTypes.FETCH_TANKS_FAILURE,
+  props<{ error: any }>()
+)
+
+export const AddTanks = createAction(
+  TanksActionTypes.ADD_TANKS,
+  props<{ tanks: Tanks }>()
+)
+
+export const AddTanksSuccess = createAction(
+  TanksActionTypes.ADD_TANKS_SUCCESS,
+  props<{ tanks: Tanks }>()
+)
+
+export const AddTanksFailure = createAction(
+  TanksActionTypes.ADD_TANKS_FAILURE,
+  props<{ error: any }>()
+)
+
+export const EditTanks = createAction(
+  TanksActionTypes.EDIT_TANKS,
+  props<{ tanks: Tanks }>()
+)
+
+export const EditTanksSuccess = createAction(
+  TanksActionTypes.EDIT_TANKS_SUCCESS,
+  props<{ tanks: Tanks }>()
+)
+
+export const EditTanksFailure = createAction(
+  TanksActionTypes.EDIT_TANKS_FAILURE,
+  props<{ error: any }>()
+)
+
+export const DeleteTanks = createAction(
+  TanksActionTypes.DELETE_TANKS,
+  props<{ id: number }>()
+)
+export const DeleteTanksSuccess = createAction(
+  TanksActionTypes.DELETE_TANKS_SUCCESS,
+  props<{ id: number }>()
+)
+
+import { Planes } from "src/models/bcatp";
+
+export enum PlanesActionTypes {
+  FETCH_PLANES = "[PLANES] Fetch Planes",
+  FETCH_PLANES_SUCCESS = "[PLANES] Fetch Planes Success",
+  FETCH_PLANES_FAILURE = "[PLANES] Fetch Planes Failed",
+  ADD_PLANES = '[PLANES] Add',
+  ADD_PLANES_SUCCESS = "[PLANES] Add Planes Success",
+  ADD_PLANES_FAILURE = "[PLANES] Add Planes Failed",
+  EDIT_PLANES = '[PLANES] EDIT',
+  EDIT_PLANES_SUCCESS = "[PLANES] EDIT Planes Success",
+  EDIT_PLANES_FAILURE = "[PLANES] EDIT Planes Failed",
+  DELETE_PLANES = "[PLANES] Delete Planes",
+  DELETE_PLANES_SUCCESS = "[PLANES] Delete Planes Success",
+  DELETE_PLANES_FAILURE = "[PLANES] Delete Planes Failed",
+}
+
+export const FetchPlanes = createAction(
+  PlanesActionTypes.FETCH_PLANES
+)
+
+export const LoadPlanesSuccess = createAction(
+  PlanesActionTypes.FETCH_PLANES_SUCCESS,
+  props<{ planes: Planes[] }>()
+)
+
+export const LoadPlanesFailure = createAction(
+  PlanesActionTypes.FETCH_PLANES_FAILURE,
+  props<{ error: any }>()
+)
+
+export const AddPlanes = createAction(
+  PlanesActionTypes.ADD_PLANES,
+  props<{ planes: Planes }>()
+)
+
+export const AddPlanesSuccess = createAction(
+  PlanesActionTypes.ADD_PLANES_SUCCESS,
+  props<{ planes: Planes }>()
+)
+
+export const AddPlanesFailure = createAction(
+  PlanesActionTypes.ADD_PLANES_FAILURE,
+  props<{ error: any }>()
+)
+
+export const EditPlanes = createAction(
+  PlanesActionTypes.EDIT_PLANES,
+  props<{ planes: Planes }>()
+)
+
+export const EditPlanesSuccess = createAction(
+  PlanesActionTypes.EDIT_PLANES_SUCCESS,
+  props<{ planes: Planes }>()
+)
+
+export const EditPlanesFailure = createAction(
+  PlanesActionTypes.EDIT_PLANES_FAILURE,
+  props<{ error: any }>()
+)
+
+export const DeletePlanes = createAction(
+  PlanesActionTypes.DELETE_PLANES,
+  props<{ id: number }>()
+)
+export const DeletePlanesSuccess = createAction(
+  PlanesActionTypes.DELETE_PLANES_SUCCESS,
+  props<{ id: number }>()
+)
+
+import { Ships } from "src/models/bcatp";
+
+export enum ShipsActionTypes {
+  FETCH_SHIPS = "[SHIPS] Fetch Ships",
+  FETCH_SHIPS_SUCCESS = "[SHIPS] Fetch Ships Success",
+  FETCH_SHIPS_FAILURE = "[SHIPS] Fetch Ships Failed",
+  ADD_SHIPS = '[SHIPS] Add',
+  ADD_SHIPS_SUCCESS = "[SHIPS] Add Ships Success",
+  ADD_SHIPS_FAILURE = "[SHIPS] Add Ships Failed",
+  EDIT_SHIPS = '[SHIPS] EDIT',
+  EDIT_SHIPS_SUCCESS = "[SHIPS] EDIT Ships Success",
+  EDIT_SHIPS_FAILURE = "[SHIPS] EDIT Ships Failed",
+  DELETE_SHIPS = "[SHIPS] Delete Ships",
+  DELETE_SHIPS_SUCCESS = "[SHIPS] Delete Ships Success",
+  DELETE_SHIPS_FAILURE = "[SHIPS] Delete Ships Failed",
+}
+
+export const FetchShips = createAction(
+  ShipsActionTypes.FETCH_SHIPS
+)
+
+export const LoadShipsSuccess = createAction(
+  ShipsActionTypes.FETCH_SHIPS_SUCCESS,
+  props<{ ships: Ships[] }>()
+)
+
+export const LoadShipsFailure = createAction(
+  ShipsActionTypes.FETCH_SHIPS_FAILURE,
+  props<{ error: any }>()
+)
+
+export const AddShips = createAction(
+  ShipsActionTypes.ADD_SHIPS,
+  props<{ ships: Ships }>()
+)
+
+export const AddShipsSuccess = createAction(
+  ShipsActionTypes.ADD_SHIPS_SUCCESS,
+  props<{ ships: Ships }>()
+)
+
+export const AddShipsFailure = createAction(
+  ShipsActionTypes.ADD_SHIPS_FAILURE,
+  props<{ error: any }>()
+)
+
+export const EditShips = createAction(
+  ShipsActionTypes.EDIT_SHIPS,
+  props<{ ships: Ships }>()
+)
+
+export const EditShipsSuccess = createAction(
+  ShipsActionTypes.EDIT_SHIPS_SUCCESS,
+  props<{ ships: Ships }>()
+)
+
+export const EditShipsFailure = createAction(
+  ShipsActionTypes.EDIT_SHIPS_FAILURE,
+  props<{ error: any }>()
+)
+
+export const DeleteShips = createAction(
+  ShipsActionTypes.DELETE_SHIPS,
+  props<{ id: number }>()
+)
+export const DeleteShipsSuccess = createAction(
+  ShipsActionTypes.DELETE_SHIPS_SUCCESS,
+  props<{ id: number }>()
+)

@@ -2,12 +2,12 @@ import { Component, OnInit, Input, Output, OnDestroy, ViewChild, ElementRef, NgZ
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BcatpService, NavyService, DewlineService, PinetreeService, MidCanadaService } from '../services/bcatp.service';
-import { AirforceService, ArmyService, DefunctService } from '../services/bcatp.service';
-import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct } from 'src/models/bcatp';
+import { AirforceService, ArmyService, DefunctService, TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
+import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct, Tanks, Planes, Ships } from 'src/models/bcatp';
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
 import { EditBcatp, EditNavy, EditDewline, EditPinetree } from '../state/actions/bcatp.actions';
-import { EditMidCanada, EditAirforce, EditArmy, EditDefunct, } from '../state/actions/bcatp.actions';
+import { EditMidCanada, EditAirforce, EditArmy, EditDefunct, EditTanks, EditPlanes, EditShips } from '../state/actions/bcatp.actions';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -54,6 +54,11 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
     private _AirforceService: AirforceService,
     private _ArmyService: ArmyService,
     private _DefunctService: DefunctService,
+
+    private _TanksService: TanksService,
+    private _PlanesService: PlanesService,
+    private _ShipsService: ShipsService,
+
     private _router: Router,
     private store: Store<AppState>,
     private router: Router,
@@ -136,6 +141,22 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
           break;
         case 'Defunct':
           this._DefunctService.getDefunctById(this.id).subscribe((response = Defunct) => {
+            this.FormName.setValue(response);
+          }, error => console.error(error));
+          break;
+
+        case 'Tanks':
+          this._TanksService.getTanksById(this.id).subscribe((response = Tanks) => {
+            this.FormName.setValue(response);
+          }, error => console.error(error));
+          break;
+        case 'Planes':
+          this._PlanesService.getPlanesById(this.id).subscribe((response = Planes) => {
+            this.FormName.setValue(response);
+          }, error => console.error(error));
+          break;
+        case 'Ships':
+          this._ShipsService.getShipsById(this.id).subscribe((response = Ships) => {
             this.FormName.setValue(response);
           }, error => console.error(error));
           break;
@@ -252,6 +273,15 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
           break;
         case 'Defunct':
           this.store.dispatch(EditDefunct({ defunct: this.FormName.value }));
+          break;
+        case 'Tanks':
+          this.store.dispatch(EditTanks({ tanks: this.FormName.value }));
+          break;
+        case 'Planes':
+          this.store.dispatch(EditPlanes({ planes: this.FormName.value }));
+          break;
+        case 'Ships':
+          this.store.dispatch(EditShips({ ships: this.FormName.value }));
           break;
       }
     }
