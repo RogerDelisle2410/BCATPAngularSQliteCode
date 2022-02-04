@@ -170,7 +170,7 @@ export class FetchDataComponent implements OnInit {
   }
 
   delete(id, name) {
-    alert(id + ' ' + name)
+  /*  alert(id + ' ' + name)*/
     const ans = confirm('Do you want to delete: ' + name + ' ' + id);
     if (ans) {
       switch (this.formname) {
