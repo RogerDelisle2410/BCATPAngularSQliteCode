@@ -342,7 +342,7 @@ export class PinetreeEffect {
 
 
 
-  import { AirforceService } from "src/app/services/bcatp.service";
+import { AirforceService } from "src/app/services/bcatp.service";
 import {
   LoadAirforceSuccess, FetchAirforce, AddAirforce, AddAirforceSuccess,
   DeleteAirforce, DeleteAirforceSuccess, EditAirforce, EditAirforceSuccess,
@@ -408,8 +408,8 @@ export class AirforceEffect {
 }
 
 
-  
-  import { ArmyService } from "src/app/services/bcatp.service";
+
+import { ArmyService } from "src/app/services/bcatp.service";
 import {
   LoadArmySuccess, FetchArmy, AddArmy, AddArmySuccess,
   DeleteArmy, DeleteArmySuccess, EditArmy, EditArmySuccess,
@@ -538,6 +538,8 @@ export class DefunctEffect {
       ),
     )
   )
+}
+
 import { TanksService } from "src/app/services/bcatp.service";
 import {
   LoadTanksSuccess, FetchTanks, AddTanks, AddTanksSuccess,
@@ -602,6 +604,7 @@ export class TanksEffect {
     )
   )
 }
+
 import { PlanesService } from "src/app/services/bcatp.service";
 import {
   LoadPlanesSuccess, FetchPlanes, AddPlanes, AddPlanesSuccess,
@@ -666,6 +669,7 @@ export class PlanesEffect {
     )
   )
 }
+
 import { ShipsService } from "src/app/services/bcatp.service";
 import {
   LoadShipsSuccess, FetchShips, AddShips, AddShipsSuccess,

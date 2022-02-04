@@ -2,13 +2,13 @@
 <ng-template #mymodal let-modal class=" ">
   <div class="modal-body ">
     <h5>{{name}}</h5>
-    <div *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships';">
+    <div *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'">
       <agm-map [latitude]='lat' [longitude]='lng' [zoom]="zoom" [mapTypeId]='mapType' [fullscreenControl]='true' [mapTypeControl]='true'>
         <agm-marker [latitude]='lat' [longitude]='lng' [label]='location.title'></agm-marker>
       </agm-map>
     </div>
 
-    <div *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships';">
+    <div *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships'">
       <img class="img-fluid" [src]='cmt' style=" height: 375px; width: auto; position: center; ">
     </div>
 
@@ -20,8 +20,8 @@
 </ng-template>
 
 
-<div class="row col-lg-12 grad1" style="height:auto;">
-  <table style="width: 100%; ">
+<div class="row col-lg-12 grad1" style="height:40px;">
+  <table style="width: 100%; height:20px;">
     <tr>
       <td style="text-align:center; align-content:center;" class='container  navbar navbar-expand-sm     center'>
         <div class="search-hero col-lg-5" style="display:inline-block;">
@@ -29,14 +29,14 @@
         </div>
 
         <div class="col-lg-2">
-
           <a href="{{wikiLink}}" target="_blank"><button id="aButton" class="button" style=""><h5>{{formname}}</h5></button></a>
-
         </div>
-
-        <div class="col-lg-2">
-
+        
+        <div class="col-lg-2" *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'">
           <button class="button" style="display:inline-block; " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
+        </div>
+        <div class="col-lg-2" *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships'">
+          <button class="button" style="display:inline-block; " [routerLink]='["/bcatp2/add", formname]'><h5>Create</h5></button>
         </div>
 
         <div class="col-lg-3">
@@ -67,7 +67,6 @@
               {{listItem.name }}
             </td>
           </ng-template>
-
           <td class="" style="font-size: 16px; text-align: left; width: 40%; word-wrap: break-word;  ">
             {{ listItem.comment }}
           </td>
@@ -77,12 +76,10 @@
           <td style="font-size: 16px; width: 10%; word-wrap: break-word; ">
             {{ listItem.longitude }}
           </td>
-
           <td style="width:16%; ">
             <button style="margin-top: -13px; margin-bottom: -15px; word-wrap: break-word; display: inline-block; color: green; " [routerLink]="['/bcatp/edit', formname, listItem.id, listItem.name, listItem.latitude, listItem.longitude]" type="submit">
               <mat-icon>edit</mat-icon>
             </button>
-
             <button style="margin-top: -13px; margin-bottom: -15px; word-wrap: break-word; display: inline-block; color: red; " [routerLink]="[]" (click)="delete(listItem.id, listItem.name)" type="submit">
               <mat-icon>delete</mat-icon>
             </button>
@@ -91,7 +88,6 @@
               <mat-icon>map</mat-icon>
             </button>
           </td>
-
         </tr>
       </tbody>
     </table>
@@ -116,17 +112,12 @@
           <mat-icon>delete</mat-icon>
         </button>
       </th>
-
-
       <th class="col-lg-12" style="">
         <img class="gallery-img" src="{{listItem.comment}} " style="width: 120px; height: 85px; float: right;"
              (click)="open(mymodal, listItem.name, listItem.latitude, listItem.longitude, listItem.comment, listItem.wiki )" type="submit" />
       </th>
-
-
     </tr>
   </table>
-  <!--[routerLink]="[]" (click)="open(mymodal, listItem.name)" type="submit"-->
 </ng-template>
 
 

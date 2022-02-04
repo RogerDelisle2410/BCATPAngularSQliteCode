@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class BcatpService {
 
-  myAppUrl =  ''; // environment.ApiBaseUrl;
+  myAppUrl = ''; // environment.ApiBaseUrl;
   constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.myAppUrl = baseUrl;
-   // this.myAppUrl = environment.ApiBaseUrl; // baseUrl;
+    // this.myAppUrl = environment.ApiBaseUrl; // baseUrl;
   }
 
   getBcatps() {
@@ -60,12 +60,12 @@ export class BcatpService {
 }
 
 
- import { Navy } from 'src/models/bcatp';
+import { Navy } from 'src/models/bcatp';
 
- @Injectable({
+@Injectable({
   providedIn: 'root'
- })
- export class NavyService {
+})
+export class NavyService {
 
   myAppUrl = '';
 
@@ -114,15 +114,15 @@ export class BcatpService {
           return response;
         }));
   }
- }
+}
 
 
- import { Dewline } from 'src/models/bcatp';
+import { Dewline } from 'src/models/bcatp';
 
- @Injectable({
+@Injectable({
   providedIn: 'root'
- })
- export class DewlineService {
+})
+export class DewlineService {
 
   myAppUrl = '';
 
@@ -172,15 +172,15 @@ export class BcatpService {
           return response;
         }));
   }
- }
+}
 
 
- import { MidCanada } from 'src/models/bcatp';
+import { MidCanada } from 'src/models/bcatp';
 
- @Injectable({
+@Injectable({
   providedIn: 'root'
- })
- export class MidCanadaService {
+})
+export class MidCanadaService {
 
   myAppUrl = '';
 
@@ -230,15 +230,15 @@ export class BcatpService {
           return response;
         }));
   }
- }
+}
 
 
- import { Pinetree } from 'src/models/bcatp';
+import { Pinetree } from 'src/models/bcatp';
 
- @Injectable({
+@Injectable({
   providedIn: 'root'
- })
- export class PinetreeService {
+})
+export class PinetreeService {
 
   myAppUrl = '';
 
@@ -288,15 +288,15 @@ export class BcatpService {
           return response;
         }));
   }
- }
+}
 
 
- import { Airforce } from 'src/models/bcatp';
+import { Airforce } from 'src/models/bcatp';
 
- @Injectable({
+@Injectable({
   providedIn: 'root'
- })
- export class AirforceService {
+})
+export class AirforceService {
 
   myAppUrl = '';
 
@@ -347,14 +347,14 @@ export class BcatpService {
         }));
   }
 
- }
+}
 
- import { Army } from 'src/models/bcatp';
+import { Army } from 'src/models/bcatp';
 
- @Injectable({
+@Injectable({
   providedIn: 'root'
- })
- export class ArmyService {
+})
+export class ArmyService {
 
   myAppUrl = '';
 
@@ -406,14 +406,14 @@ export class BcatpService {
   }
 
 
- }
+}
 
- import { Defunct } from 'src/models/bcatp';
+import { Defunct } from 'src/models/bcatp';
 
- @Injectable({
+@Injectable({
   providedIn: 'root'
- })
- export class DefunctService {
+})
+export class DefunctService {
 
   myAppUrl = '';
 
@@ -463,7 +463,7 @@ export class BcatpService {
           return response;
         }));
   }
- }
+}
 
 import { Tanks } from 'src/models/bcatp';
 

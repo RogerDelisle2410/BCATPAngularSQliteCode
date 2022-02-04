@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone } from '@an
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { BcatpService, NavyService, DewlineService, PinetreeService, MidCanadaService } from '../services/bcatp.service';
-import { AirforceService, ArmyService, DefunctService, TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
-import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct, Tanks, Planes, Ships } from 'src/models/bcatp';
+import { AirforceService, ArmyService, DefunctService } from '../services/bcatp.service';
+import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct } from 'src/models/bcatp';
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
 import { AddBcatp, AddNavy, AddDewline, AddPinetree } from '../state/actions/bcatp.actions';
-import { AddAirforce, AddArmy, AddDefunct, AddMidCanada, AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
+import { AddAirforce, AddArmy, AddDefunct, AddMidCanada } from '../state/actions/bcatp.actions';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { FetchDataComponent } from '../fetch-data/fetch-data.component';
 
 @Component({
-  selector: 'app-create-new',
+  selector: 'app-create-new-armament',
   templateUrl: './create-new.component.html',
   styleUrls: ['./create-new.component.css']
 })
@@ -24,7 +24,7 @@ import { FetchDataComponent } from '../fetch-data/fetch-data.component';
 export class CreateBcatpComponent implements OnInit, OnDestroy {
   FormName3: FormGroup;
   title = 'Create';
- 
+
   latitude: number | 6;
   longitude: number | 6;
   id: number;
@@ -57,11 +57,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     private _AirforceService: AirforceService,
     private _ArmyService: ArmyService,
     private _DefunctService: DefunctService,
-    private _TanksService: TanksService,
-    private _PlanesService: PlanesService,
-    private _ShipsService: ShipsService,
+
     private _router: Router,
-    private store: Store<AppState>, 
+    private store: Store<AppState>,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
   ) {
@@ -143,21 +141,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
           this.FormName3.setValue(response);
         }, error => console.error(error));
         break;
-      case 'Tanks':
-        this._TanksService.getTanksById(this.id).subscribe((response = Tanks) => {
-          this.FormName3.setValue(response);
-        }, error => console.error(error));
-        break;
-      case 'Planes':
-        this._PlanesService.getPlanesById(this.id).subscribe((response = Planes) => {
-          this.FormName3.setValue(response);
-        }, error => console.error(error));
-        break;
-      case 'Ships':
-        this._ShipsService.getShipsById(this.id).subscribe((response = Ships) => {
-          this.FormName3.setValue(response);
-        }, error => console.error(error));
-        break;
+
     }
 
 
@@ -193,7 +177,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-      //this.name2 = position.
+        //this.name2 = position.
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 12;
@@ -237,62 +221,51 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    
+
     if (!this.FormName3.valid) {
       return;
     }
     if (this.title === 'Create') {
-      
+
       switch (this.formname3) {
         case 'Bcatp':
-          
+
           this.store.dispatch(AddBcatp({ bcatp: this.FormName3.value }));
-           this._router.navigateByUrl('/fetch-data/Bcatp/bcatp');
+          this._router.navigateByUrl('/fetch-data/Bcatp/bcatp');
           break;
         case 'Navy':
-          
+
           this.store.dispatch(AddNavy({ navy: this.FormName3.value }));
-          this._router.navigateByUrl('/fetch-navy/Navy/navy'); 
+          this._router.navigateByUrl('/fetch-navy/Navy/navy');
           break;
-        case 'Dewline':  
+        case 'Dewline':
           this.store.dispatch(AddDewline({ dewline: this.FormName3.value }));
           this._router.navigateByUrl('/fetch-dewline/Dewline/dewline');
           break;
-        case 'Pinetree':  
+        case 'Pinetree':
           this.store.dispatch(AddPinetree({ pinetree: this.FormName3.value }));
-           this._router.navigateByUrl('/fetch-pinetree/Pinetree/pinetree');
+          this._router.navigateByUrl('/fetch-pinetree/Pinetree/pinetree');
           break;
-        case 'MidCanada':  
+        case 'MidCanada':
           this.store.dispatch(AddMidCanada({ midcanada: this.FormName3.value }));
-           this._router.navigateByUrl('/fetch-midcanada/MidCanada/midcanada');
+          this._router.navigateByUrl('/fetch-midcanada/MidCanada/midcanada');
           break;
-        case 'Army':  
+        case 'Army':
           this.store.dispatch(AddArmy({ army: this.FormName3.value }));
-         this._router.navigateByUrl('/fetch-army/Army/army');
+          this._router.navigateByUrl('/fetch-army/Army/army');
           break;
-        case 'Airforce':  
+        case 'Airforce':
           this.store.dispatch(AddAirforce({ airforce: this.FormName3.value }));
           this._router.navigateByUrl('/fetch-airforce/Airforce/airforce');
           break;
-        case 'Defunct':  ;
+        case 'Defunct': ;
           this.store.dispatch(AddDefunct({ defunct: this.FormName3.value }));
-        this._router.navigateByUrl('/fetch-defunct/Defunct/defunct');
+          this._router.navigateByUrl('/fetch-defunct/Defunct/defunct');
           break;
-        case 'Tanks':
-          this.store.dispatch(AddTanks({ tanks: this.FormName3.value }));
-          this._router.navigateByUrl('/fetch-tanks/Tanks/tanks');
-          break;
-        case 'Planes':
-          this.store.dispatch(AddPlanes({ planes: this.FormName3.value }));
-          this._router.navigateByUrl('/fetch-planes/Planes/planes');
-          break;
-        case 'Ships':
-          this.store.dispatch(AddShips({ ships: this.FormName3.value }));
-          this._router.navigateByUrl('/fetch-ships/Ships/ships');
-          break;
-        
+
+
       }
-    }  
+    }
     this.location.back();
   }
 

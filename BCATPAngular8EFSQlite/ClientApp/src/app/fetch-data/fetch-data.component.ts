@@ -62,7 +62,7 @@ export class FetchDataComponent implements OnInit {
   name: string;
   lat: number | 6;
   lng: number | 6;
-  comment: string;
+  comment: string; cmt: string;
   searchText: string;
   wiki: string;
   mapType = 'satellite';
@@ -170,6 +170,7 @@ export class FetchDataComponent implements OnInit {
   }
 
   delete(id, name) {
+    alert(id + ' ' + name)
     const ans = confirm('Do you want to delete: ' + name + ' ' + id);
     if (ans) {
       switch (this.formname) {
@@ -216,6 +217,7 @@ export class FetchDataComponent implements OnInit {
       this.lng = longitude;
       this.lat = latitude;
       this.name = name;
+      this.cmt = comment;
     }
   }
 } 

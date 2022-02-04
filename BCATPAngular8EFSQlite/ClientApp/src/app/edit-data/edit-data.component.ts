@@ -29,6 +29,7 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
 
   lat: number | 6;
   lng: number | 6;
+  cmt: string;
   mapType = 'satellite';
   zoom = 13;
   address: string;
@@ -41,6 +42,7 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
   get name3() { return this.FormName.get('name').value; }
   get lat3() { return this.FormName.get('latitude').value; }
   get lng3() { return this.FormName.get('longitude').value; }
+  get cmt3() { return this.FormName.get('comment').value; }
 
   @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
