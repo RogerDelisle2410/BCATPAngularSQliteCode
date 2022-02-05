@@ -13,13 +13,13 @@ html body {
   position: relative;
 }
 
-btn {
+/*btn {
   font-size: 0.875em;
-  display: block;
+  display: block;*/
    /* left: -60px;*/
-  margin-top: 35px;
+  /*margin-top: 35px;
   width: 100%;
-}
+}*/
 
 .modal-dialog {
   position: center;

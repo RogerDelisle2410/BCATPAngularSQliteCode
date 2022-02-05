@@ -21,22 +21,22 @@
 
 
 <div class="row col-lg-12 grad1" style="height:40px;">
-  <table style="width: 100%; height:20px;">
+  <table style="width: 100%;  ">
     <tr>
       <td style="text-align:center; align-content:center;" class='container  navbar navbar-expand-sm     center'>
         <div class="search-hero col-lg-5" style="display:inline-block;">
-          <input class="form-control" style="width:200px; height:25px; display:inline-block; margin-bottom:10px" type="search" #filterName name="filterName" [(ngModel)]="searchText" placeholder="Search" id="myInput" />
-        </div>
+          <input class="form-control" style="width:200px; height:25px; display:inline-block;  " type="search" #filterName name="filterName" [(ngModel)]="searchText" placeholder="Search" id="myInput" />
+        </div>      
 
         <div class="col-lg-2">
-          <a href="{{wikiLink}}" target="_blank"><button id="aButton" class="button" style=""><h5>{{formname}}</h5></button></a>
+          <a href="{{wikiLink}}" target="_blank"><td id="aButton" class="button" style=" color: blue; text-decoration: underline;"><h5>{{formname}}</h5></td></a>
         </div>
-        
+
         <div class="col-lg-2" *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'">
-          <button class="button" style="display:inline-block; " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
+          <button class="button"  style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
         </div>
         <div class="col-lg-2" *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships'">
-          <button class="button" style="display:inline-block; " [routerLink]='["/bcatp2/add", formname]'><h5>Create</h5></button>
+          <button class="button" style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp2/add", formname]'><h5>Create</h5></button>
         </div>
 
         <div class="col-lg-3">
@@ -100,15 +100,15 @@
   <table class="row grad1 col-md-12 table table-bordered" style="width: 100%;">
     <tr style="width: 100%; " class="col-lg-4" *ngFor="let listItem of this.astring$ | async | filter:searchText |   paginate:  { itemsPerPage: 9, currentPage: page   }; let i = index">
 
-      <th class="col-lg-12" style="  font-size: 16px;">
+      <th class="col-lg-12" style="  font-size: 13px;">
         <a href='{{listItem.wiki}}' target="_blank" style="color: blue; text-decoration: underline; word-wrap: break-word;">
           {{listItem.name }}
         </a>
         <br />
-        <button style="margin-top: 30px; margin-bottom: 15px; word-wrap: break-word; display: inline-block; color: green; " [routerLink]="['/bcatp/edit', formname, listItem.id, listItem.name, listItem.latitude, listItem.longitude]" type="submit">
+        <button style="margin-top: 30px;   word-wrap: break-word; display: inline-block; color: green; " [routerLink]="['/bcatp/edit', formname, listItem.id, listItem.name, listItem.latitude, listItem.longitude]" type="submit">
           <mat-icon>edit</mat-icon>
         </button>
-        <button style="margin-top: 30px; margin-bottom: 15px; word-wrap: break-word; display: inline-block; color: red; " [routerLink]="[]" (click)="delete(listItem.id, listItem.name)" type="submit">
+        <button style="margin-top: 30px;  word-wrap: break-word; display: inline-block; color: red; " [routerLink]="[]" (click)="delete(listItem.id, listItem.name)" type="submit">
           <mat-icon>delete</mat-icon>
         </button>
       </th>

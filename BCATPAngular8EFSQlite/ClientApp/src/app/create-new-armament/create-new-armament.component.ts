@@ -77,9 +77,9 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
 
     this.FormName4 = this._fb.group({
       id: 0,
-      name: [''], //[Validators.required]],
-      longitude: [''], //[Validators.required]],
-      latitude: [''], //[Validators.required]],
+      name: [' ', [Validators.required]],
+      longitude: 0, //[Validators.required]],
+      latitude: 0, //[Validators.required]],
       comment: [''],
       wiki: ['']
     });
@@ -196,11 +196,12 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
       return;
     }
     if (this.title === 'Create') {
-
+      //this.FormName4.value(this.longitude = 0);
+      //this.FormName4.value(this.latitude = 0);
       switch (this.formname4) {
+
         
-        case 'Tanks':
-          
+        case 'Tanks':          
          /* alert(this.FormName4.value(this.id)); */
           this.store.dispatch(AddTanks({ tanks: this.FormName4.value }));
           this._router.navigateByUrl('/fetch-tanks/Tanks/tanks');

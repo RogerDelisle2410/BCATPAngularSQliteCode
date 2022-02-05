@@ -82,9 +82,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
     this.FormName3 = this._fb.group({
       id: 0,
-      name: [''], //[Validators.required]],
-      longitude: [''], //[Validators.required]],
-      latitude: [''], //[Validators.required]],
+      name: ['' ,  [Validators.required]],
+      longitude: ['' , [Validators.required]],
+      latitude: ['' ,  [Validators.required]],
       comment: [''],
       wiki: ['']
     });
