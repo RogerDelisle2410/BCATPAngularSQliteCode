@@ -10,27 +10,27 @@
               <input class="form-control" placeholder="name" type="text" id="name" formControlName="name">
               <!--value="{{address}}"/>-->
             </div>
-            <span class="text-danger" *ngIf="name2?.invalid && formDir.submitted">
+            <!--<span class="text-danger" *ngIf="name2?.invalid && formDir.submitted">
               Name is required.
-            </span>
+            </span>-->
           </div>
           <div class="form-group row">
             <label class="control-label col-md-12" for="Latitude">Latitude</label>
             <div class="col-md-10">
               <input class="form-control" placeholder="latitude" type="number" id="latitude" formControlName="latitude" value="{{latitude}}" />  
             </div>
-            <span class="text-danger" *ngIf="latitude.invalid && formDir.submitted">
+            <!--<span class="text-danger" *ngIf="latitude.invalid && formDir.submitted">
               Latitude is required
-            </span>
+            </span>-->
           </div>
           <div class="form-group row">
             <label class="control-label col-md-12" for="Longitude">Longitude</label>
             <div class="col-md-10">
               <input class="form-control" placeholder="longitude" type="number" id="longitude" formControlName="longitude" value="{{longitude}}" />  
             </div>
-            <span class="text-danger" *ngIf="longitude.invalid && formDir.submitted">
+            <!--<span class="text-danger" *ngIf="longitude.invalid && formDir.submitted">
               Longitude is required
-            </span>
+            </span>-->
           </div>
           <div class="form-group row">
             <label class="control-label col-md-12" for="Comment">Comment</label>
