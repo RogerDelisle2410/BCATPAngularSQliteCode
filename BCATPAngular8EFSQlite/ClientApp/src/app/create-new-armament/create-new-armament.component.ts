@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 
 import { TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
 import { Tanks, Planes, Ships } from 'src/models/bcatp';
@@ -11,7 +11,9 @@ import { AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { MapsAPILoader } from '@agm/core';
+import { MapsAPILoader, MouseEvent } from '@agm/core';
+
+import { FetchDataComponent } from '../fetch-data/fetch-data.component';
 
 @Component({
   selector: 'app-create-new-armament',
@@ -40,8 +42,8 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
   params: any;
 
   get name4() { return this.FormName4.get('name').value; }
-  //get latitude2() { return this.FormName4.get('latitude').value; }
-  //get longitude2() { return this.FormName4.get('longitude').value; }
+  get latitude2() { return this.FormName4.get('latitude').value; }
+  get longitude2() { return this.FormName4.get('longitude').value; }
 
   @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
@@ -129,7 +131,6 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
       //this.FormName4.value(this.latitude = 0);
       switch (this.formname4) {
 
-
         case 'Tanks':
           /* alert(this.FormName4.value(this.id)); */
           this.store.dispatch(AddTanks({ tanks: this.FormName4.value }));
@@ -146,16 +147,14 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
 
       }
     }
-     this.location.back(); 
+    this.location.back();
   }
 
   cancel() {
-    //this.title = '';
-    //this.location.back();
-
-    this._router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this._router.onSameUrlNavigation = 'reload';
-    this._router.navigate(['/same-route']);
+    {
+      this.title = '';
+      this._router.navigate(['/fetch-bcatp']);
+    }
   }
 
   get nm() { return this.FormName4.get('name'); }

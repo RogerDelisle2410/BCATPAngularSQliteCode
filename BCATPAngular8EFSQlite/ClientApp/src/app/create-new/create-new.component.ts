@@ -24,7 +24,7 @@ import { FetchDataComponent } from '../fetch-data/fetch-data.component';
 export class CreateBcatpComponent implements OnInit, OnDestroy {
   FormName3: FormGroup;
   title = 'Create';
-  name: string;
+
   latitude: number | 6;
   longitude: number | 6;
   id: number;
@@ -82,7 +82,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
     this.FormName3 = this._fb.group({
       id: 0,
-      name: [''] ,  //[Validators.required]],
+      name: [''],  //[Validators.required]],
       longitude: [''], //[Validators.required]],
       latitude: [''],  //[Validators.required]],
       comment: [''],
@@ -146,9 +146,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
 
     this.mapsAPILoader.load().then(() => {
-      this.nm.setValue('Calgary');
-      this.lat.setValue(51.098310);
-      this.lng.setValue(-114.012187);
+      //this.nm.setValue('Calgary');
+      //this.lat.setValue(51.098310);
+      //this.lng.setValue(-114.012187);
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
@@ -176,7 +176,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position,) => { 
+      navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 12;
@@ -185,13 +185,13 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
         this.FormName3.value('latitude').value = this.lat;
         this.FormName3.value('longitude').value = this.lng;
 
-        this.getAddress(this.name, this.latitude, this.longitude);
+        this.getAddress(this.latitude, this.longitude);
       });
     }
   }
 
-  getAddress(name, latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { name2: name, latitude2: latitude, longitude2: longitude } }, (results, status) => {
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { latitude2: latitude, longitude2: longitude } }, (results, status) => {
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
@@ -213,10 +213,10 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
   markerDragEnd($event: MouseEvent) {
     console.log($event);
-    this.name = $event.placeId;
+    this.name2 = $event.placeId;
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
-    this.getAddress(this.name, this.latitude, this.longitude);
+    this.getAddress(this.latitude, this.longitude);
   }
 
   save() {
@@ -228,12 +228,10 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
       switch (this.formname3) {
         case 'Bcatp':
-
           this.store.dispatch(AddBcatp({ bcatp: this.FormName3.value }));
           this._router.navigateByUrl('/fetch-data/Bcatp/bcatp');
           break;
         case 'Navy':
-
           this.store.dispatch(AddNavy({ navy: this.FormName3.value }));
           this._router.navigateByUrl('/fetch-navy/Navy/navy');
           break;
@@ -261,23 +259,17 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
           this.store.dispatch(AddDefunct({ defunct: this.FormName3.value }));
           this._router.navigateByUrl('/fetch-defunct/Defunct/defunct');
           break;
-
-
       }
     }
-    document.location.reload();
-     /* this.location.back(); */
+    this.location.back();
   }
 
   cancel() {
-    //this.title = '';
-    //this.location.back();
+    {
+      this.title = '';
+      this._router.navigate(['/fetch-bcatp']);
+    }
 
-    this._router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this._router.onSameUrlNavigation = 'reload';
-    this._router.navigate(['/same-route']);
-
-    
   }
 
   get nm() { return this.FormName3.get('name'); }

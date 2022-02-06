@@ -29,7 +29,7 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
 
   lat: number | 6;
   lng: number | 6;
-  cmt: string;
+   
   mapType = 'satellite';
   zoom = 13;
   address: string;
