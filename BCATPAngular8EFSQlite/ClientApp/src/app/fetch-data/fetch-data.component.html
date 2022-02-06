@@ -20,31 +20,32 @@
 </ng-template>
 
 
-<div class="row col-lg-12 grad1" style="height:40px;">
-  <table style="width: 100%;  ">
-    <tr>
-      <td style="text-align:center; align-content:center;" class='container  navbar navbar-expand-sm     center'>
-        <div class="search-hero col-lg-5" style="display:inline-block;">
-          <input class="form-control" style="width:200px; height:25px; display:inline-block;  " type="search" #filterName name="filterName" [(ngModel)]="searchText" placeholder="Search" id="myInput" />
-        </div>      
+<!--<div class="row col-lg-12 grad1" style="height:40px;">-->
+<table style="width: 100%;  ">
+  <tr>
+    <td style="text-align:center; align-content:center;" class='container  navbar navbar-expand-sm     center'>
+      <div class="search-hero col-lg-5" style="display:inline-block;">
+        <input class="form-control" style="width:200px; height:25px; display:inline-block;  " type="search" #filterName name="filterName" [(ngModel)]="searchText" placeholder="Search" id="myInput" />
+      </div>
 
-        <div class="col-lg-2">
-          <a href="{{wikiLink}}" target="_blank"><td id="aButton" class="button" style=" color: blue; text-decoration: underline;"><h5>{{formname}}</h5></td></a>
-        </div>
+      <div class="col-lg-2">
+        <a href="{{wikiLink}}" target="_blank"><div id="aButton" class="button" style="font-weight:bold; color: white; text-decoration: underline;"><h5>{{formname}}</h5></div></a>
+      </div>
 
-        <div class="col-lg-2" *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'">
-          <button class="button"  style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
-        </div>
-        <div class="col-lg-2" *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships'">
-          <button class="button" style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp2/add", formname]'><h5>Create</h5></button>
-        </div>
+      <div class="col-lg-2" *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'">
+        <button class="button" style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
+      </div>
+      <div class="col-lg-2" *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships'">
+        <button class="button" style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp2/add", formname]'><h5>Create</h5></button>
+      </div>
 
-        <div class="col-lg-3">
-        </div>
-      </td>
-    </tr>
-  </table>
-</div>
+      <div class="col-lg-3">
+      </div>
+    </td>
+  </tr>
+</table>
+<!--</div>-->
+
 <div *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'; else ShowBlockArmaments">
 
   <div class="row content grad1 col-lg-12" id="main" style="height:auto;">
@@ -127,7 +128,7 @@
     <div class="row ">
       <div class="col-lg-2  "></div>
       <div class="col-lg-8  ">
-        <pagination-controls (pageChange)="page=$event"></pagination-controls>
+        <pagination-controls (pageChange)="page=$event" (page)="onPaginateChange($event)">></pagination-controls>
       </div>
       <div class="col-lg-2  "></div>
     </div>

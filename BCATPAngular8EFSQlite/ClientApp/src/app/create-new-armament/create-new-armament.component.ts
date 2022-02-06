@@ -1,19 +1,17 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {  TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
-import {  Tanks, Planes, Ships } from 'src/models/bcatp';
+import { TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
+import { Tanks, Planes, Ships } from 'src/models/bcatp';
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
 
-import {  AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
+import { AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { MapsAPILoader, MouseEvent } from '@agm/core';
-
-import { FetchDataComponent } from '../fetch-data/fetch-data.component';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-create-new-armament',
@@ -42,14 +40,14 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
   params: any;
 
   get name4() { return this.FormName4.get('name').value; }
-  get latitude2() { return this.FormName4.get('latitude').value; }
-  get longitude2() { return this.FormName4.get('longitude').value; }
+  //get latitude2() { return this.FormName4.get('latitude').value; }
+  //get longitude2() { return this.FormName4.get('longitude').value; }
 
   @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
 
   constructor(private modalService: NgbModal, private _fb: FormBuilder, private _avRoute: ActivatedRoute, public location: Location,
-   
+
     private _TanksService: TanksService,
     private _PlanesService: PlanesService,
     private _ShipsService: ShipsService,
@@ -96,7 +94,7 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
     this.title = 'Create';
 
     switch (this.formname4) {
-      
+
       case 'Tanks':
         this._TanksService.getTanksById(this.id).subscribe((response = Tanks) => {
           this.FormName4.setValue(response);
@@ -113,81 +111,12 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
         }, error => console.error(error));
         break;
     }
-
-
-    this.mapsAPILoader.load().then(() => {
-      //this.nm.setValue('Calgary');
-      //this.lat.setValue(51.09831098319883);
-      //this.lng.setValue(-114.01218795776366);
-      this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          this.name2 = place.formatted_address
-          this.name2 = this.name2.split(',')[0];
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-
-          this.nm.setValue(this.name2);
-          this.lat.setValue(this.latitude);
-          this.lng.setValue(this.longitude);
-
-          this.zoom = 12;
-        });
-      });
-    });
-  }
-
-  private setCurrentLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        //this.name2 = position.
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
-
-        this.FormName4.value('name').value = this.nm;
-        this.FormName4.value('latitude').value = this.lat;
-        this.FormName4.value('longitude').value = this.lng;
-
-        this.getAddress(this.latitude, this.longitude);
-      });
-    }
-  }
-
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { latitude2: latitude, longitude2: longitude } }, (results, status) => {
-      if (status === 'OK') {
-        if (results[0]) {
-          this.zoom = 12;
-          this.address = results[0].formatted_address;
-        } else {
-          window.alert('No results found');
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
-      }
-    });
   }
 
   ngOnDestroy() {
     this.nameSubscription.unsubscribe();
     this.latSubscription.unsubscribe();
     this.lngSubscription.unsubscribe();
-  }
-
-  markerDragEnd($event: MouseEvent) {
-    console.log($event);
-    this.name2 = $event.placeId;
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
-    this.getAddress(this.latitude, this.longitude);
   }
 
   save() {
@@ -200,9 +129,9 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
       //this.FormName4.value(this.latitude = 0);
       switch (this.formname4) {
 
-        
-        case 'Tanks':          
-         /* alert(this.FormName4.value(this.id)); */
+
+        case 'Tanks':
+          /* alert(this.FormName4.value(this.id)); */
           this.store.dispatch(AddTanks({ tanks: this.FormName4.value }));
           this._router.navigateByUrl('/fetch-tanks/Tanks/tanks');
           break;
@@ -217,12 +146,16 @@ export class CreateBcatpComponent2 implements OnInit, OnDestroy {
 
       }
     }
-    this.location.back();
+     this.location.back(); 
   }
 
   cancel() {
-    this.title = '';
-    this.location.back();
+    //this.title = '';
+    //this.location.back();
+
+    this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this._router.onSameUrlNavigation = 'reload';
+    this._router.navigate(['/same-route']);
   }
 
   get nm() { return this.FormName4.get('name'); }

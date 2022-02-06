@@ -8,7 +8,9 @@
             <label class=" control-label col-md-12">Name</label>
             <div class="col-md-10">
               <input class="form-control" placeholder="name" type="text" id="name" formControlName="name">
-              <!--value="{{address}}"/>-->
+              <!--<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+                <span ng-show="myForm.name.$error.required">name is required.</span>
+              </span>-->
             </div>
             <!--<span class="text-danger" *ngIf="name2?.invalid && formDir.submitted">
               Name is required.
