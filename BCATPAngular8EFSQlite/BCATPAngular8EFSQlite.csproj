@@ -55,6 +55,7 @@
     <Compile Remove="ClientApp\src\app\add-dewline\**" />
     <Compile Remove="ClientApp\src\app\add-navy\**" />
     <Compile Remove="ClientApp\src\app\common-component\**" />
+    <Compile Remove="ClientApp\src\app\common\**" />
     <Compile Remove="ClientApp\src\app\counter\**" />
     <Compile Remove="ClientApp\src\app\create-new1\**" />
     <Compile Remove="ClientApp\src\app\dialog-exemple\**" />
@@ -73,6 +74,7 @@
     <Content Remove="ClientApp\src\app\add-dewline\**" />
     <Content Remove="ClientApp\src\app\add-navy\**" />
     <Content Remove="ClientApp\src\app\common-component\**" />
+    <Content Remove="ClientApp\src\app\common\**" />
     <Content Remove="ClientApp\src\app\counter\**" />
     <Content Remove="ClientApp\src\app\create-new1\**" />
     <Content Remove="ClientApp\src\app\dialog-exemple\**" />
@@ -90,6 +92,7 @@
     <EmbeddedResource Remove="ClientApp\src\app\add-dewline\**" />
     <EmbeddedResource Remove="ClientApp\src\app\add-navy\**" />
     <EmbeddedResource Remove="ClientApp\src\app\common-component\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\common\**" />
     <EmbeddedResource Remove="ClientApp\src\app\counter\**" />
     <EmbeddedResource Remove="ClientApp\src\app\create-new1\**" />
     <EmbeddedResource Remove="ClientApp\src\app\dialog-exemple\**" />
@@ -108,6 +111,7 @@
     <None Remove="ClientApp\src\app\add-dewline\**" />
     <None Remove="ClientApp\src\app\add-navy\**" />
     <None Remove="ClientApp\src\app\common-component\**" />
+    <None Remove="ClientApp\src\app\common\**" />
     <None Remove="ClientApp\src\app\counter\**" />
     <None Remove="ClientApp\src\app\create-new1\**" />
     <None Remove="ClientApp\src\app\dialog-exemple\**" />
@@ -125,6 +129,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\node_modules\**" />
+    <TypeScriptCompile Remove="ClientApp\src\app\common\**" />
     <TypeScriptCompile Remove="ClientApp\src\app\create-new1\**" />
   </ItemGroup>
 
@@ -172,6 +177,13 @@
     <None Remove="ClientApp\dist\runtime-es5.5d248a55231dbc94e56e.js" />
     <None Remove="ClientApp\dist\styles.eee70b2a93e156fddb47.css" />
     <None Remove="ClientApp\src\app.js" />
+    <None Remove="ClientApp\src\app\app.component.html" />
+    <None Remove="ClientApp\src\app\app.component.js" />
+    <None Remove="ClientApp\src\app\app.component.js.map" />
+    <None Remove="ClientApp\src\app\app.component.ts" />
+    <None Remove="ClientApp\src\app\common\global-constants.js" />
+    <None Remove="ClientApp\src\app\common\global-constants.js.map" />
+    <None Remove="ClientApp\src\app\common\global-constants.ts" />
     <None Remove="ClientApp\src\app\edit-data\common.component.html" />
     <None Remove="ClientApp\src\app\add-dewline\add-dewline.component.css" />
     <None Remove="ClientApp\src\app\add-dewline\add-dewline.component.html" />
@@ -230,6 +242,7 @@
     <None Remove="ClientApp\src\app\footer\footer.component.html" />
     <None Remove="ClientApp\src\app\footer\footer.component.spec.ts" />
     <None Remove="ClientApp\src\app\footer\footer.component.ts" />
+    <None Remove="ClientApp\src\app\global-constants.ts" />
     <None Remove="ClientApp\src\app\router-link\router-link.component.css" />
     <None Remove="ClientApp\src\app\router-link\router-link.component.html" />
     <None Remove="ClientApp\src\app\router-link\router-link.component.spec.ts" />
@@ -259,6 +272,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\app.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\create-new\create-new.component.spec.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\create-new\create-new.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\state\reducers\airforce.reducer.ts" />

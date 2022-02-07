@@ -24,9 +24,7 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
   id: number;
   formname: string;
   getById: string;
-  name2: string;
-
-
+  name2: string;  
   lat: number | 6;
   lng: number | 6;
    
@@ -82,6 +80,7 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
     if (this._avRoute.snapshot.params['longitude']) {
       this.lng = Math.max(this._avRoute.snapshot.params['longitude']);
     }
+    
 
     this.FormName = this._fb.group({
       id: 0,
@@ -294,6 +293,7 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
     {
       this.title = '';
       this._router.navigate(['/fetch-bcatp']);
+      
     }
   }
 

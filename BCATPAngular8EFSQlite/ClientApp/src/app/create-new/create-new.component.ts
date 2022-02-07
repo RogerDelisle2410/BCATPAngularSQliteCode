@@ -22,7 +22,7 @@ import { FetchDataComponent } from '../fetch-data/fetch-data.component';
 })
 
 export class CreateBcatpComponent implements OnInit, OnDestroy {
-  FormName3: FormGroup;
+  FormName3: FormGroup; 
   title = 'Create';
 
   latitude: number | 6;
@@ -90,7 +90,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.nameSubscription = this.FormName3.get('name').valueChanges.subscribe();
     this.latSubscription = this.FormName3.get('latitude').valueChanges.subscribe();
     this.lngSubscription = this.FormName3.get('longitude').valueChanges.subscribe();
@@ -146,7 +146,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
 
     this.mapsAPILoader.load().then(() => {
-      //this.nm.setValue('Calgary');
+      this.nm.setValue('Calgary');
       //this.lat.setValue(51.098310);
       //this.lng.setValue(-114.012187);
       this.setCurrentLocation();
@@ -265,11 +265,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    {
-      this.title = '';
-      this._router.navigate(['/fetch-bcatp']);
-    }
-
+    this.title = '';
+    
+    this._router.navigate(['/fetch-bcatp']);
   }
 
   get nm() { return this.FormName3.get('name'); }

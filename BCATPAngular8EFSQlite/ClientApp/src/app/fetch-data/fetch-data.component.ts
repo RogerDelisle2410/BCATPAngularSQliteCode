@@ -55,8 +55,9 @@ export class FetchDataComponent implements OnInit {
   public shipsList: Observable<Ships[]>;
 
   public astring$: object;
-  public wikiLink: string;
-  page = 1;
+  public wikiLink: string; 
+  page =1; 
+  
   formname: string;
   formname2: string;
   name: string;
@@ -74,10 +75,13 @@ export class FetchDataComponent implements OnInit {
     }
     if (this._avRoute.snapshot.params['formname2']) {
       this.formname2 = this._avRoute.snapshot.params['formname2'];
-    } 
+    }
+
+   // FetchDataComponent.pageNo = this.page;
+    
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     switch (this.formname) {
       case 'Bcatp':
         this.store.dispatch(FetchBcatp());
@@ -169,8 +173,7 @@ export class FetchDataComponent implements OnInit {
     }
   }
 
-  delete(id, name) {
-  /*  alert(id + ' ' + name)*/
+  delete(id, name) { 
     const ans = confirm('Do you want to delete: ' + name + ' ' + id);
     if (ans) {
       switch (this.formname) {

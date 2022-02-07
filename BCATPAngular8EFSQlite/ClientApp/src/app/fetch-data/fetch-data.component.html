@@ -27,21 +27,17 @@
         <div class="search-hero col-lg-5" style="display:inline-block;">
           <input class="form-control" style="width:200px; height:25px; display:inline-block;  " type="search" #filterName name="filterName" [(ngModel)]="searchText" placeholder="Search" id="myInput" />
         </div>
+      </td>
+      <td id="aButton" class="button" style=" color: blue; text-decoration: underline; margin-bottom: 20px;">
+        <h5>{{formname}}</h5>
+        <a href="{{wikiLink}}" target="_blank" class="col-lg-2"> </a>
+      </td>
 
-        <div class="col-lg-2">
-          <a href="{{wikiLink}}" target="_blank">
-      <td id="aButton" class="button" style=" color: blue; text-decoration: underline;"><h5>{{formname}}</h5></td></a>
-</div>
-
-<div class="col-lg-2" *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'">
-  <button class="button" style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
-</div>
-<div class="col-lg-2" *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships'">
-  <button class="button" style="display: inline-block; margin-bottom: 5px; " [routerLink]='["/bcatp2/add", formname]'><h5>Create</h5></button>
-</div>
-
-<div class="col-lg-3">
-</div>
+      <td class=" col-lg-2">
+        <button class="button " *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'" style="display: inline-block; margin-bottom: 20px;   " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
+      </td>
+      <td class="  col-lg-2">
+        <button class="button   " *ngIf="formname === 'Planes' || formname === 'Tanks' || formname === 'Ships'" style="display: inline-block; margin-bottom: 20px; " [routerLink]='["/bcatp2/add", formname]'><h5>Create</h5></button>
       </td>
     </tr>
   </table>
@@ -92,7 +88,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table> <h4>{{page}}</h4>
   </div>
 </div>
 
@@ -119,19 +115,19 @@
              (click)="open(mymodal, listItem.name, listItem.latitude, listItem.longitude, listItem.comment, listItem.wiki )" type="submit" />
       </th>
     </tr>
-  </table>
+
+  </table> <h4>{{page}}</h4>
 </ng-template>
 
-
-
-<footer class="col-lg-12 grad2" style="    font-size: 16px;">
-  <div class="footer   grad2 " id="footer">
-    <div class="row ">
-      <div class="col-lg-2  "></div>
-      <div class="col-lg-8  ">
+<footer class="col-lg-12 grad2" style="font-size: 16px;">
+  <div class="footer grad2" id="footer">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
         <pagination-controls (pageChange)="page=$event"></pagination-controls>
+
       </div>
-      <div class="col-lg-2  "></div>
+      <div class="col-lg-2"></div>
     </div>
   </div>
 </footer>
