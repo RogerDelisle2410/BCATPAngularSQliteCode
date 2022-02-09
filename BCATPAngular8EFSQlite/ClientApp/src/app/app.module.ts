@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AddBcatpComponent } from './edit-data/edit-data.component';
 import { CreateBcatpComponent } from './create-new/create-new.component';
-import { CreateBcatpComponent2 } from './create-new-armament/create-new-armament.component';
+/*import { CreateBcatpComponent2 } from './create-new-armament/create-new-armament.component';*/
 import { DataComponent } from './display-data/display-data';
 import { HeaderComponent } from './header/header.component';
 import { navyReducer } from './state/reducers/navy.reducer';
@@ -40,7 +40,7 @@ import { MatIconModule } from '@angular/material/icon';
 //import { MatPaginatorModule } from "@angular/material/Paginator";
 //import { MatTableModule } from "@angular/material/table";
 
- 
+import { Directive, Input, Output, EventEmitter } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { MatIconModule } from '@angular/material/icon';
     FetchDataComponent,
     AddBcatpComponent,
     CreateBcatpComponent,
-    CreateBcatpComponent2,
+/*    CreateBcatpComponent2,*/
     DataComponent,
     HeaderComponent
   ],
@@ -100,7 +100,7 @@ import { MatIconModule } from '@angular/material/icon';
      /* { path: 'register-bcatp/:formname', component: AddBcatpComponent },*/
       { path: 'bcatp/edit/:formname/:id/:name/:latitude/:longitude', component: AddBcatpComponent },
       { path: 'bcatp/add/:formname3', component: CreateBcatpComponent },
-      { path: 'bcatp2/add/:formname4', component: CreateBcatpComponent2 },
+     /* { path: 'bcatp2/add/:formname4', component: CreateBcatpComponent2 },*/
     ])
   ],
   providers: [],

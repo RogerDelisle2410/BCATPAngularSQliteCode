@@ -3,17 +3,21 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { BcatpService, NavyService, DewlineService, PinetreeService, MidCanadaService } from '../services/bcatp.service';
 import { AirforceService, ArmyService, DefunctService } from '../services/bcatp.service';
+import { TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
 import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct } from 'src/models/bcatp';
+import { Tanks, Planes, Ships } from 'src/models/bcatp';
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
 import { AddBcatp, AddNavy, AddDewline, AddPinetree } from '../state/actions/bcatp.actions';
 import { AddAirforce, AddArmy, AddDefunct, AddMidCanada } from '../state/actions/bcatp.actions';
+import { AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
+
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 
-import { FetchDataComponent } from '../fetch-data/fetch-data.component';
+/*import { FetchDataComponent } from '../fetch-data/fetch-data.component';*/
 
 @Component({
   selector: 'app-create-new-armament',
@@ -57,7 +61,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     private _AirforceService: AirforceService,
     private _ArmyService: ArmyService,
     private _DefunctService: DefunctService,
-
+    private _TanksService: TanksService,
+    private _PlanesService: PlanesService,
+    private _ShipsService: ShipsService,
     private _router: Router,
     private store: Store<AppState>,
     private mapsAPILoader: MapsAPILoader,
@@ -69,7 +75,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     }
     if (this._avRoute.snapshot.params['formname3']) {
       this.formname3 = this._avRoute.snapshot.params['formname3'];
-    }
+    } 
     if (this._avRoute.snapshot.params['name']) {
       this.name2 = this._avRoute.snapshot.params['name'];
     }
@@ -82,15 +88,22 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
     this.FormName3 = this._fb.group({
       id: 0,
-      name: [''],  //[Validators.required]],
-      longitude: [''], //[Validators.required]],
-      latitude: [''],  //[Validators.required]],
+      name: ['',  [Validators.required]],
+      longitude: ['', [Validators.required]],
+      latitude: ['',  [Validators.required]],
       comment: [''],
       wiki: ['']
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
+
+    if (this.formname3 === 'Planes' || this.formname3 === 'Ships' || this.formname3 === 'Tanks') {
+      this.lat.setValue(0);
+      this.lng.setValue(0);
+      this.myFunction();
+    }
+   
     this.nameSubscription = this.FormName3.get('name').valueChanges.subscribe();
     this.latSubscription = this.FormName3.get('latitude').valueChanges.subscribe();
     this.lngSubscription = this.FormName3.get('longitude').valueChanges.subscribe();
@@ -141,16 +154,30 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
           this.FormName3.setValue(response);
         }, error => console.error(error));
         break;
-
+      case 'Tanks':
+        this._TanksService.getTanksById(this.id).subscribe((response = Tanks) => {
+          this.FormName3.setValue(response);
+        }, error => console.error(error));
+        break;
+      case 'Planes':
+        this._PlanesService.getPlanesById(this.id).subscribe((response = Planes) => {
+          this.FormName3.setValue(response);
+        }, error => console.error(error));
+        break;
+      case 'Ships':
+        this._ShipsService.getShipsById(this.id).subscribe((response = Ships) => {
+          this.FormName3.setValue(response);
+        }, error => console.error(error));
+        break;
     }
 
 
     this.mapsAPILoader.load().then(() => {
-      this.nm.setValue('Calgary');
+      //this.nm.setValue('Calgary');
       //this.lat.setValue(51.098310);
       //this.lng.setValue(-114.012187);
       this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
+      this.geoCoder = new google.maps.Geocoder; 
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
@@ -177,8 +204,8 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
+        this.latitude = Number(position.coords.latitude.toFixed(6));
+        this.longitude = Number(position.coords.longitude.toFixed(6));
         this.zoom = 12;
 
         this.FormName3.value('name').value = this.nm;
@@ -220,8 +247,10 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   }
 
   save() {
-
-    if (!this.FormName3.valid) {
+    if (this.formname3 === 'Planes' || this.formname3 === 'Ships' || this.formname3 === 'Tanks') {
+      this.longitude = 0; this.latitude = 0;
+    }
+    if (!this.FormName3.valid) { 
       return;
     }
     if (this.title === 'Create') {
@@ -259,15 +288,32 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
           this.store.dispatch(AddDefunct({ defunct: this.FormName3.value }));
           this._router.navigateByUrl('/fetch-defunct/Defunct/defunct');
           break;
+        case 'Tanks': 
+          this.store.dispatch(AddTanks({ tanks: this.FormName3.value }));
+          this._router.navigateByUrl('/fetch-tanks/Tanks/tanks');
+          break;
+        case 'Planes':
+          this.store.dispatch(AddPlanes({ planes: this.FormName3.value }));
+          this._router.navigateByUrl('/fetch-planes/Planes/planes');
+          break;
+        case 'Ships':
+          this.store.dispatch(AddShips({ ships: this.FormName3.value }));
+          this._router.navigateByUrl('/fetch-ships/Ships/ships');
+          break;
       }
     }
     this.location.back();
-  }
+  } 
+
+  myFunction() { 
+    var x = document.getElementById("searchBar");      
+      x.style.display = "none";     
+  }  
 
   cancel() {
-    this.title = '';
-    
-    this._router.navigate(['/fetch-bcatp']);
+    this.title = ''; 
+    this.location.back();
+    /*this._router.navigate(['/fetch-bcatp']);*/
   }
 
   get nm() { return this.FormName3.get('name'); }

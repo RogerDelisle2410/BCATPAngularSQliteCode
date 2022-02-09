@@ -19,7 +19,7 @@ var home_component_1 = require("./home/home.component");
 var fetch_data_component_1 = require("./fetch-data/fetch-data.component");
 var edit_data_component_1 = require("./edit-data/edit-data.component");
 var create_new_component_1 = require("./create-new/create-new.component");
-var create_new_armament_component_1 = require("./create-new-armament/create-new-armament.component");
+/*import { CreateBcatpComponent2 } from './create-new-armament/create-new-armament.component';*/
 var display_data_1 = require("./display-data/display-data");
 var header_component_1 = require("./header/header.component");
 var navy_reducer_1 = require("./state/reducers/navy.reducer");
@@ -41,11 +41,6 @@ var ngx_pagination_1 = require("ngx-pagination");
 var core_2 = require("@agm/core");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var icon_1 = require("@angular/material/icon");
-//import { MatInputModule } from "@angular/material/input";
-//import { MatSortModule } from "@angular/material/Sort";
-//import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-//import { MatPaginatorModule } from "@angular/material/Paginator";
-//import { MatTableModule } from "@angular/material/table";
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -58,7 +53,7 @@ var AppModule = /** @class */ (function () {
                 fetch_data_component_1.FetchDataComponent,
                 edit_data_component_1.AddBcatpComponent,
                 create_new_component_1.CreateBcatpComponent,
-                create_new_armament_component_1.CreateBcatpComponent2,
+                /*    CreateBcatpComponent2,*/
                 display_data_1.DataComponent,
                 header_component_1.HeaderComponent
             ],
@@ -100,7 +95,7 @@ var AppModule = /** @class */ (function () {
                     /* { path: 'register-bcatp/:formname', component: AddBcatpComponent },*/
                     { path: 'bcatp/edit/:formname/:id/:name/:latitude/:longitude', component: edit_data_component_1.AddBcatpComponent },
                     { path: 'bcatp/add/:formname3', component: create_new_component_1.CreateBcatpComponent },
-                    { path: 'bcatp2/add/:formname4', component: create_new_armament_component_1.CreateBcatpComponent2 },
+                    /* { path: 'bcatp2/add/:formname4', component: CreateBcatpComponent2 },*/
                 ])
             ],
             providers: [],
