@@ -1,4 +1,4 @@
-form { 
+form {
   font-size: 14px;
 }
 
@@ -22,6 +22,7 @@ agm-map {
   *:after {
     box-sizing: border-box;
   }
+
 .modal-dialog {
   position: center;
   /*display: table;*/ /* This is important */

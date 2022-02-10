@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BcatpService, NavyService, DewlineService, PinetreeService, MidCanadaService } from '../services/bcatp.service';
@@ -54,11 +54,9 @@ export class AddBcatpComponent implements OnInit, OnDestroy {
     private _AirforceService: AirforceService,
     private _ArmyService: ArmyService,
     private _DefunctService: DefunctService,
-
     private _TanksService: TanksService,
     private _PlanesService: PlanesService,
     private _ShipsService: ShipsService,
-
     private _router: Router,
     private store: Store<AppState>,
     private router: Router,

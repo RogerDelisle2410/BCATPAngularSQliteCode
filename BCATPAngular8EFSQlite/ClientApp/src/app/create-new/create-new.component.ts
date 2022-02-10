@@ -1,29 +1,23 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BcatpService, NavyService, DewlineService, PinetreeService, MidCanadaService } from '../services/bcatp.service';
-import { AirforceService, ArmyService, DefunctService } from '../services/bcatp.service';
-import { TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
-import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct } from 'src/models/bcatp';
-import { Tanks, Planes, Ships } from 'src/models/bcatp';
+import { AirforceService, ArmyService, DefunctService, TanksService, PlanesService, ShipsService } from '../services/bcatp.service';
+import { Bcatp, Navy, Dewline, Pinetree, MidCanada, Airforce, Army, Defunct, Tanks, Planes, Ships } from 'src/models/bcatp';
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
 import { AddBcatp, AddNavy, AddDewline, AddPinetree } from '../state/actions/bcatp.actions';
-import { AddAirforce, AddArmy, AddDefunct, AddMidCanada } from '../state/actions/bcatp.actions';
-import { AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
+import { AddAirforce, AddArmy, AddDefunct, AddMidCanada, AddTanks, AddPlanes, AddShips } from '../state/actions/bcatp.actions';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
-
-/*import { FetchDataComponent } from '../fetch-data/fetch-data.component';*/
 
 @Component({
   selector: 'app-create-new-armament',
   templateUrl: './create-new.component.html',
   styleUrls: ['./create-new.component.css']
 })
-
 export class CreateBcatpComponent implements OnInit, OnDestroy {
   FormName3: FormGroup;
   FormName4: FormGroup;
@@ -32,7 +26,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   latitude: number | 6;
   longitude: number | 6;
   id: number;
-  formname3: string; 
+  formname3: string;
   name2: string;
   zoom: number;
   address: string;
@@ -40,9 +34,10 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   mapType = 'satellite';
   getById: string;
   private route;
-  //nameSubscription: Subscription;
-  //latSubscription: Subscription;
-  //lngSubscription: Subscription;
+  nameSubscription: Subscription;
+  latSubscription: Subscription;
+  lngSubscription: Subscription;
+  name4Subscription: Subscription;
   params: any;
 
   get name3() { return this.FormName3.get('name').value; }
@@ -55,7 +50,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
 
-  constructor(private modalService: NgbModal, private _fb: FormBuilder, private _avRoute: ActivatedRoute, public location: Location,
+  constructor(private modalService: NgbModal, private _fb1: FormBuilder, private _fb2: FormBuilder, private _avRoute: ActivatedRoute, public location: Location,
     private _BcatpService: BcatpService,
     private _NavyService: NavyService,
     private _DewlineService: DewlineService,
@@ -79,7 +74,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     if (this._avRoute.snapshot.params['formname3']) {
       this.formname3 = this._avRoute.snapshot.params['formname3'];
     }
-    
+
     if (this._avRoute.snapshot.params['name']) {
       this.name2 = this._avRoute.snapshot.params['name'];
     }
@@ -90,7 +85,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
       this.longitude = Math.max(this._avRoute.snapshot.params['longitude']);
     }
 
-    this.FormName3 = this._fb.group({
+    this.FormName3 = this._fb1.group({
       id: 0,
       name: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
@@ -98,7 +93,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
       comment: [''],
       wiki: ['']
     });
-    this.FormName4 = this._fb.group({
+    this.FormName4 = this._fb2.group({
       id: 0,
       name: ['', [Validators.required]],
       longitude: 0,
@@ -116,9 +111,10 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
       this.myFunction();
     }
 
-    //this.nameSubscription = this.FormName3.get('name').valueChanges.subscribe();
-    //this.latSubscription = this.FormName3.get('latitude').valueChanges.subscribe();
-    //this.lngSubscription = this.FormName3.get('longitude').valueChanges.subscribe();
+    this.nameSubscription = this.FormName3.get('name').valueChanges.subscribe();
+    this.latSubscription = this.FormName3.get('latitude').valueChanges.subscribe();
+    this.lngSubscription = this.FormName3.get('longitude').valueChanges.subscribe();
+    this.name4Subscription = this.FormName4.get('name').valueChanges.subscribe(); 
 
     this.getById = 'this._' + this.formname3 + 'Service.get' + this.formname3 +
       'ById(this.id).subscribe((response=' + this.formname3 + ') => { this.FormName3.setValue(response);}, error => console.error(error));';
@@ -185,9 +181,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
 
     this.mapsAPILoader.load().then(() => {
-      //this.nm.setValue('Calgary');
-      //this.lat.setValue(51.098310);
-      //this.lng.setValue(-114.012187);
+      this.nm.setValue(' ');
+      this.lat.setValue(0);
+      this.lng.setValue(0);
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
@@ -221,9 +217,10 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
         this.zoom = 12;
 
         this.FormName3.value('name').value = this.nm;
-        this.FormName3.value('latitude').value = this.lat;
-        this.FormName3.value('longitude').value = this.lng;
-
+        //this.FormName3.value('latitude').value = this.lat;
+        //this.FormName3.value('longitude').value = this.lng;
+        this.FormName3.value('latitude').value = this.latitude;
+        this.FormName3.value('longitude').value = this.longitude;
         this.getAddress(this.latitude, this.longitude);
       });
     }
@@ -244,21 +241,27 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     });
   }
 
-  //ngOnDestroy() {
-  //  this.nameSubscription.unsubscribe();
-  //  this.latSubscription.unsubscribe();
-  //  this.lngSubscription.unsubscribe();
-  //}
+  ngOnDestroy() {
+    this.nameSubscription.unsubscribe();
+    this.name4Subscription.unsubscribe();
+    this.latSubscription.unsubscribe();
+    this.lngSubscription.unsubscribe();
+  }
 
   markerDragEnd($event: MouseEvent) {
     console.log($event);
     this.name2 = $event.placeId;
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
+
+    this.latitude = Number($event.coords.lat.toFixed(6));
+    this.longitude = Number($event.coords.lng.toFixed(6));
+
+    //this.latitude = $event.coords.lat;
+    //this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
 
   save1() {
+  /*  alert('save 1');*/
     //if (this.formname3 === 'Planes' || this.formname3 === 'Ships' || this.formname3 === 'Tanks') {
     //  this.longitude = 0; this.latitude = 0;
     //}
@@ -320,6 +323,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   }
 
   save2() {
+   /* alert('save 2');*/
     if (this.formname3 === 'Planes' || this.formname3 === 'Ships' || this.formname3 === 'Tanks') {
       this.longitude = 0; this.latitude = 0;
     }
@@ -371,4 +375,9 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   //get comment() { return this.FormName4.get('comment'); }
   //get wiki() { return this.FormName4.get('wiki'); }
 
+  get nm2() { return this.FormName4.get('name'); }
+  get lng2() { return this.FormName4.get('longitude'); }
+  get lat2() { return this.FormName4.get('latitude'); }
+  get comment2() { return this.FormName4.get('comment'); }
+  get wiki2() { return this.FormName4.get('wiki'); }
 }
