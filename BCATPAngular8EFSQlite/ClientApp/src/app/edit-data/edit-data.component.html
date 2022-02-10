@@ -1,9 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <form [formGroup]="FormName" (ngSubmit)="save()" #formDir="ngForm" novalidate>
-
-
   <div class="container grad1" *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships';">
-
     <div class=row>
       <div class="col-lg-4" style="align-content:center;border:solid; border-width:1px; border-color:black;">
         <div class="form-group row">
