@@ -25,13 +25,14 @@ import { MapsAPILoader, MouseEvent } from '@agm/core';
 })
 
 export class CreateBcatpComponent implements OnInit, OnDestroy {
-  FormName3: FormGroup; 
+  FormName3: FormGroup;
+  FormName4: FormGroup;
   title = 'Create';
 
   latitude: number | 6;
   longitude: number | 6;
   id: number;
-  formname3: string;
+  formname3: string; 
   name2: string;
   zoom: number;
   address: string;
@@ -39,14 +40,17 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   mapType = 'satellite';
   getById: string;
   private route;
-  nameSubscription: Subscription;
-  latSubscription: Subscription;
-  lngSubscription: Subscription;
+  //nameSubscription: Subscription;
+  //latSubscription: Subscription;
+  //lngSubscription: Subscription;
   params: any;
 
   get name3() { return this.FormName3.get('name').value; }
   get latitude2() { return this.FormName3.get('latitude').value; }
   get longitude2() { return this.FormName3.get('longitude').value; }
+  get name4() { return this.FormName4.get('name').value; }
+  get latitude4() { return this.FormName4.get('latitude').value; }
+  get longitude4() { return this.FormName4.get('longitude').value; }
 
   @ViewChild('search', { static: true })
   public searchElementRef: ElementRef;
@@ -74,7 +78,8 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     }
     if (this._avRoute.snapshot.params['formname3']) {
       this.formname3 = this._avRoute.snapshot.params['formname3'];
-    } 
+    }
+    
     if (this._avRoute.snapshot.params['name']) {
       this.name2 = this._avRoute.snapshot.params['name'];
     }
@@ -87,9 +92,17 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
 
     this.FormName3 = this._fb.group({
       id: 0,
-      name: ['',  [Validators.required]],
+      name: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
-      latitude: ['',  [Validators.required]],
+      latitude: ['', [Validators.required]],
+      comment: [''],
+      wiki: ['']
+    });
+    this.FormName4 = this._fb.group({
+      id: 0,
+      name: ['', [Validators.required]],
+      longitude: 0,
+      latitude: 0,
       comment: [''],
       wiki: ['']
     });
@@ -102,10 +115,10 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
       this.lng.setValue(0);
       this.myFunction();
     }
-   
-    this.nameSubscription = this.FormName3.get('name').valueChanges.subscribe();
-    this.latSubscription = this.FormName3.get('latitude').valueChanges.subscribe();
-    this.lngSubscription = this.FormName3.get('longitude').valueChanges.subscribe();
+
+    //this.nameSubscription = this.FormName3.get('name').valueChanges.subscribe();
+    //this.latSubscription = this.FormName3.get('latitude').valueChanges.subscribe();
+    //this.lngSubscription = this.FormName3.get('longitude').valueChanges.subscribe();
 
     this.getById = 'this._' + this.formname3 + 'Service.get' + this.formname3 +
       'ById(this.id).subscribe((response=' + this.formname3 + ') => { this.FormName3.setValue(response);}, error => console.error(error));';
@@ -155,17 +168,17 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
         break;
       case 'Tanks':
         this._TanksService.getTanksById(this.id).subscribe((response = Tanks) => {
-          this.FormName3.setValue(response);
+          this.FormName4.setValue(response);
         }, error => console.error(error));
         break;
       case 'Planes':
         this._PlanesService.getPlanesById(this.id).subscribe((response = Planes) => {
-          this.FormName3.setValue(response);
+          this.FormName4.setValue(response);
         }, error => console.error(error));
         break;
       case 'Ships':
         this._ShipsService.getShipsById(this.id).subscribe((response = Ships) => {
-          this.FormName3.setValue(response);
+          this.FormName4.setValue(response);
         }, error => console.error(error));
         break;
     }
@@ -176,7 +189,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
       //this.lat.setValue(51.098310);
       //this.lng.setValue(-114.012187);
       this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder; 
+      this.geoCoder = new google.maps.Geocoder;
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
@@ -231,11 +244,11 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.nameSubscription.unsubscribe();
-    this.latSubscription.unsubscribe();
-    this.lngSubscription.unsubscribe();
-  }
+  //ngOnDestroy() {
+  //  this.nameSubscription.unsubscribe();
+  //  this.latSubscription.unsubscribe();
+  //  this.lngSubscription.unsubscribe();
+  //}
 
   markerDragEnd($event: MouseEvent) {
     console.log($event);
@@ -245,11 +258,13 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
     this.getAddress(this.latitude, this.longitude);
   }
 
-  save() {
-    if (this.formname3 === 'Planes' || this.formname3 === 'Ships' || this.formname3 === 'Tanks') {
-      this.longitude = 0; this.latitude = 0;
-    }
-    if (!this.FormName3.valid) { 
+  save1() {
+    //if (this.formname3 === 'Planes' || this.formname3 === 'Ships' || this.formname3 === 'Tanks') {
+    //  this.longitude = 0; this.latitude = 0;
+    //}
+    this.lat.setValue(this.latitude);
+    this.lng.setValue(this.longitude);
+    if (!this.FormName3.valid) {
       return;
     }
     if (this.title === 'Create') {
@@ -287,38 +302,73 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
           this.store.dispatch(AddDefunct({ defunct: this.FormName3.value }));
           this._router.navigateByUrl('/fetch-defunct/Defunct/defunct');
           break;
-        case 'Tanks': 
-          this.store.dispatch(AddTanks({ tanks: this.FormName3.value }));
+        //case 'Tanks':
+        //  this.store.dispatch(AddTanks({ tanks: this.FormName3.value }));
+        //  this._router.navigateByUrl('/fetch-tanks/Tanks/tanks');
+        //  break;
+        //case 'Planes':
+        //  this.store.dispatch(AddPlanes({ planes: this.FormName3.value }));
+        //  this._router.navigateByUrl('/fetch-planes/Planes/planes');
+        //  break;
+        //case 'Ships':
+        //  this.store.dispatch(AddShips({ ships: this.FormName3.value }));
+        //  this._router.navigateByUrl('/fetch-ships/Ships/ships');
+        //  break;
+      }
+    }
+    this.location.back();
+  }
+
+  save2() {
+    if (this.formname3 === 'Planes' || this.formname3 === 'Ships' || this.formname3 === 'Tanks') {
+      this.longitude = 0; this.latitude = 0;
+    }
+    if (!this.FormName4.valid) {
+      return;
+    }
+    if (this.title === 'Create') {
+
+      switch (this.formname3) {
+        case 'Tanks':
+          this.store.dispatch(AddTanks({ tanks: this.FormName4.value }));
           this._router.navigateByUrl('/fetch-tanks/Tanks/tanks');
           break;
         case 'Planes':
-          this.store.dispatch(AddPlanes({ planes: this.FormName3.value }));
+          this.store.dispatch(AddPlanes({ planes: this.FormName4.value }));
           this._router.navigateByUrl('/fetch-planes/Planes/planes');
           break;
         case 'Ships':
-          this.store.dispatch(AddShips({ ships: this.FormName3.value }));
+          this.store.dispatch(AddShips({ ships: this.FormName4.value }));
           this._router.navigateByUrl('/fetch-ships/Ships/ships');
           break;
       }
     }
     this.location.back();
-  } 
+  }
 
-  myFunction() { 
-    var x = document.getElementById("searchBar");      
-      x.style.display = "none";     
-  }  
+  myFunction() {
+    var x = document.getElementById("searchBar");
+    x.style.display = "none";
+  }
 
-  cancel() {
-    this.title = ''; 
+  cancel1() {
+    this.title = '';
     this.location.back();
     /*this._router.navigate(['/fetch-bcatp']);*/
   }
-
+  cancel2() {
+    this.title = '';
+    this.location.back();
+    /*this._router.navigate(['/fetch-bcatp']);*/
+  }
   get nm() { return this.FormName3.get('name'); }
   get lng() { return this.FormName3.get('longitude'); }
   get lat() { return this.FormName3.get('latitude'); }
   get comment() { return this.FormName3.get('comment'); }
   get wiki() { return this.FormName3.get('wiki'); }
+
+  //get nm() { return this.FormName3.get('name'); }
+  //get comment() { return this.FormName4.get('comment'); }
+  //get wiki() { return this.FormName4.get('wiki'); }
 
 }
