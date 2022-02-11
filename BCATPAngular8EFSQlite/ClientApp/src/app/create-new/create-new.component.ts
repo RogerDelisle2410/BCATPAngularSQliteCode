@@ -361,7 +361,7 @@ export class CreateBcatpComponent implements OnInit, OnDestroy {
   }
   cancel2() {
     this.title = '';
-   /* this.location.back();*/
+    this.location.back();
     this._router.navigate(['/fetch-bcatp']);
   }
   get nm() { return this.FormName3.get('name'); }
