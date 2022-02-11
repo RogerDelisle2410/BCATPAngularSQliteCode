@@ -47,7 +47,7 @@ namespace BCATPAngular8EFSQlite.Models
             modelBuilder.Entity<TblPlanes>().ToTable("Planes");
             OnModelCreatingPartial(modelBuilder);
             modelBuilder.Entity<TblShips>().ToTable("Ships");
-            OnModelCreatingPartial(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);    
         }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }

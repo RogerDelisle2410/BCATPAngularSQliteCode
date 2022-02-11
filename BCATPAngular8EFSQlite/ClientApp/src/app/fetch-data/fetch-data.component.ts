@@ -20,16 +20,16 @@ import { getShips } from 'src/app/state/reducers/ships.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html',
   styleUrls: ['./fetch-data.component.css']
-})
+}) 
 
 export class FetchDataComponent implements OnInit {
-
   comparablePartyHeadersTrimmed = [
     'Name',
     'Info',
@@ -37,7 +37,6 @@ export class FetchDataComponent implements OnInit {
     'Longitude', 
     'Edit - Del - Map', 
   ];
-
   loading$: Observable<Boolean>;
   error$: Observable<Error>;
 
@@ -56,8 +55,9 @@ export class FetchDataComponent implements OnInit {
 
   public astring$: object;
   public wikiLink: string; 
-  page =1; 
-  
+
+  page;
+
   formname: string;
   formname2: string;
   name: string;
@@ -75,13 +75,25 @@ export class FetchDataComponent implements OnInit {
     }
     if (this._avRoute.snapshot.params['formname2']) {
       this.formname2 = this._avRoute.snapshot.params['formname2'];
-    }
-
-   // FetchDataComponent.pageNo = this.page;
-    
+    }  
   }
+ /* (Number(localStorage.getItem('lastPage')) == 0) && (*/
+  ngOnInit() {
 
-  ngOnInit() { 
+     
+   /* var aaa = localStorage.getItem('lastForm');*/
+    if (this.formname !== localStorage.getItem('lastForm'))
+    {
+      this.page = 1; 
+    }
+    else
+    {
+      this.page = (Number(localStorage.getItem('lastPage'))); 
+    }
+    localStorage.clear();
+    localStorage.setItem('lastPage', this.page.toString());
+    localStorage.setItem('lastForm', this.formname.toString());
+
     switch (this.formname) {
       case 'Bcatp':
         this.store.dispatch(FetchBcatp());
@@ -173,6 +185,17 @@ export class FetchDataComponent implements OnInit {
     }
   }
 
+  createFunction() {
+    //window.localStorage.clear();
+    //window.localStorage.setItem('lastPage', this.page.toString());
+    //window.localStorage.setItem('lastForm', this.formname.toString());
+  }
+  savePage() {
+    localStorage.clear();
+    localStorage.setItem('lastPage', this.page.toString());
+    localStorage.setItem('lastForm', this.formname.toString());
+  }
+
   delete(id, name) { 
     const ans = confirm('Do you want to delete: ' + name + ' ' + id);
     if (ans) {
@@ -223,4 +246,4 @@ export class FetchDataComponent implements OnInit {
       this.cmt = comment;
     }
   }
-} 
+}  

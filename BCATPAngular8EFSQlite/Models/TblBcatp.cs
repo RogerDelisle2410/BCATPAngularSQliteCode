@@ -1,27 +1,16 @@
 ﻿namespace BCATPAngular8EFSQlite.Models
 {
-    public class TblBcatp : TblAllFormat
-    { }
-    public class TblNavy : TblAllFormat
-    { }
-    public class TblDewline : TblAllFormat
-    { }
-    public class TblMidCanada : TblAllFormat
-    { }
-    public class TblPinetree : TblAllFormat
-    { }
-    public class TblAirforce : TblAllFormat
-    { }
-    public class TblArmy : TblAllFormat
-    { }
-    public class TblDefunct : TblAllFormat
-    { }
-    public class TblTanks : TblAllFormat
-    { }
-    public class TblPlanes : TblAllFormat
-    { }
-    public class TblShips : TblAllFormat
-    { }
+    public class TblBcatp : TblAllFormat { }
+    public class TblNavy : TblAllFormat { }
+    public class TblDewline : TblAllFormat { }
+    public class TblMidCanada : TblAllFormat { }
+    public class TblPinetree : TblAllFormat { }
+    public class TblAirforce : TblAllFormat { }
+    public class TblArmy : TblAllFormat { }
+    public class TblDefunct : TblAllFormat { }
+    public class TblTanks : TblAllFormat { }
+    public class TblPlanes : TblAllFormat { }
+    public class TblShips : TblAllFormat { }
     public class TblAllFormat
     {
         public int Id { get; set; }

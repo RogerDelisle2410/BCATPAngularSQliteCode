@@ -19,7 +19,6 @@
   </div>
 </ng-template>
 
-
 <div class="row col-lg-12 grad1" style="height:40px;">
   <table style="width: 100%;  ">
     <tr>
@@ -33,7 +32,7 @@
         <a href="{{wikiLink}}" target="_blank" class="col-lg-2"> </a>
       </td>
       <td class=" col-lg-2">
-        <button class="button " style="display: inline-block; margin-bottom: 20px;   " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
+        <button class="button" style="display: inline-block; margin-bottom: 20px;" [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
       </td>
       <!--<td class=" col-lg-2">
         <button class="button " *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'" style="display: inline-block; margin-bottom: 20px;   " [routerLink]='["/bcatp/add", formname]'><h5>Create</h5></button>
@@ -44,7 +43,12 @@
     </tr>
   </table>
 </div>
-
+<!--<h3>
+  {{aaa}}
+</h3>
+<h3>
+  {{bbb}}
+</h3>-->
 <div *ngIf="formname !== 'Planes' && formname !== 'Tanks' && formname !== 'Ships'; else ShowBlockArmaments">
 
   <div class="row content grad1 col-lg-12" id="main" style="height:auto;">
@@ -90,7 +94,7 @@
           </td>
         </tr>
       </tbody>
-    </table>  
+    </table>
   </div>
 </div>
 
@@ -116,9 +120,9 @@
         <img class="gallery-img" src="{{listItem.comment}} " style="width: 120px; height: 85px; float: right;"
              (click)="open(mymodal, listItem.name, listItem.latitude, listItem.longitude, listItem.comment, listItem.wiki )" type="submit" />
       </th>
-    </tr>
+      <!--</tr>-->
 
-  </table>  
+  </table>
 </ng-template>
 
 <footer class="col-lg-12 grad2" style="font-size: 16px;">
@@ -126,8 +130,8 @@
     <div class="row">
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
-        <pagination-controls (pageChange)="page=$event"></pagination-controls>
-
+        <pagination-controls (pageChange)="page=$event; savePage()"></pagination-controls>
+        <!--savePage()-->
       </div>
       <div class="col-lg-2"></div>
     </div>

@@ -242,6 +242,7 @@
     <None Remove="ClientApp\src\app\footer\footer.component.html" />
     <None Remove="ClientApp\src\app\footer\footer.component.spec.ts" />
     <None Remove="ClientApp\src\app\footer\footer.component.ts" />
+    <None Remove="ClientApp\src\app\global-component.ts" />
     <None Remove="ClientApp\src\app\global-constants.ts" />
     <None Remove="ClientApp\src\app\router-link\router-link.component.css" />
     <None Remove="ClientApp\src\app\router-link\router-link.component.html" />

@@ -9,8 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AddBcatpComponent } from './edit-data/edit-data.component';
-import { CreateBcatpComponent } from './create-new/create-new.component';
-/*import { CreateBcatpComponent2 } from './create-new-armament/create-new-armament.component';*/
+import { CreateBcatpComponent } from './create-new/create-new.component'; 
 import { DataComponent } from './display-data/display-data';
 import { HeaderComponent } from './header/header.component';
 import { navyReducer } from './state/reducers/navy.reducer';
@@ -33,14 +32,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatIconModule } from '@angular/material/icon';
-//import { MatInputModule } from "@angular/material/input";
-//import { MatSortModule } from "@angular/material/Sort";
-//import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-//import { MatPaginatorModule } from "@angular/material/Paginator";
-//import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from '@angular/material/icon'; 
 
-import { Directive, Input, Output, EventEmitter } from '@angular/core';
+/*import { Directive, Input, Output, EventEmitter } from '@angular/core';*/
 
 @NgModule({
   declarations: [
@@ -96,11 +90,9 @@ import { Directive, Input, Output, EventEmitter } from '@angular/core';
       { path: 'fetch-tanks/:formname/:formname2', component: FetchDataComponent },
       { path: 'fetch-planes/:formname/:formname2', component: FetchDataComponent },
       { path: 'fetch-ships/:formname/:formname2', component: FetchDataComponent },
-
-     /* { path: 'register-bcatp/:formname', component: AddBcatpComponent },*/
+ 
       { path: 'bcatp/edit/:formname/:id/:name/:latitude/:longitude', component: AddBcatpComponent },
       { path: 'bcatp/add/:formname3', component: CreateBcatpComponent },
-     /* { path: 'bcatp2/add/:formname4', component: CreateBcatpComponent2 },*/
     ])
   ],
   providers: [],
