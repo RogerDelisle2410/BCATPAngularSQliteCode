@@ -55,7 +55,6 @@ export class FetchDataComponent implements OnInit {
 
   public astring$: object;
   public wikiLink: string; 
-
   page;
 
   formname: string;
@@ -77,11 +76,9 @@ export class FetchDataComponent implements OnInit {
       this.formname2 = this._avRoute.snapshot.params['formname2'];
     }  
   }
- /* (Number(localStorage.getItem('lastPage')) == 0) && (*/
+
   ngOnInit() {
 
-     
-   /* var aaa = localStorage.getItem('lastForm');*/
     if (this.formname !== localStorage.getItem('lastForm'))
     {
       this.page = 1; 
@@ -195,7 +192,6 @@ export class FetchDataComponent implements OnInit {
     localStorage.setItem('lastPage', this.page.toString());
     localStorage.setItem('lastForm', this.formname.toString());
   }
-
   delete(id, name) { 
     const ans = confirm('Do you want to delete: ' + name + ' ' + id);
     if (ans) {
