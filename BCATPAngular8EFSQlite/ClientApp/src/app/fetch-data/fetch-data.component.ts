@@ -30,13 +30,13 @@ import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 }) 
 
 export class FetchDataComponent implements OnInit {
-  comparablePartyHeadersTrimmed = [
-    'Name',
-    'Info',
-    'Latitude',
-    'Longitude', 
-    'Edit - Del - Map', 
-  ];
+  //comparablePartyHeadersTrimmed = [
+  //  'Name',
+  //  'Info',
+  //  'Latitude',
+  //  'Longitude', 
+  //  'Edit - Del - Map', 
+  //];
   loading$: Observable<Boolean>;
   error$: Observable<Error>;
 
