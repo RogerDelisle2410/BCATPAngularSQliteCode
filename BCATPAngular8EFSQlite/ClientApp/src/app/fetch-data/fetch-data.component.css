@@ -32,7 +32,7 @@ html body {
 }
 
 .img1 {
-  height: 375px;
+  height: auto;
   width: auto;
   position: center;
 }
@@ -40,6 +40,7 @@ html body {
   width: 120px;
   height: 85px;
   float: right;
+ 
 }
 .button1 {
   float: right;
