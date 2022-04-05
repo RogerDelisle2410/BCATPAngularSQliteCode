@@ -1,4 +1,3 @@
-using BCATPAngular8EFSQlite;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
